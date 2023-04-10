@@ -24,7 +24,10 @@ class ApiFeatures {
         removeFields.forEach(key => delete queryCopy[key])
         // console.log(queryCopy);
 
-        let queryStr = JSON.stringify(queryCopy); queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`)
+
+        // filter for price and rating
+        let queryStr = JSON.stringify(queryCopy);
+        queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`)
 
 
         this.query = this.query.find(JSON.parse(queryStr));
@@ -41,11 +44,7 @@ class ApiFeatures {
         this.query = this.query.limit(resultPerPage).skip(skip);
 
         return this;
-
-
     }
-
-
 }
 
 module.exports = ApiFeatures;
