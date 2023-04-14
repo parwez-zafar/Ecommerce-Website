@@ -19,6 +19,7 @@ const ApiFeatures = require('../utils/apifeature');
 // these are same 
 exports.createProduct = async (req, res, next) => {
     try {
+        req.body.user = req.user.id;
         const product = await Product.create(req.body);
 
         res.status(201).json({
