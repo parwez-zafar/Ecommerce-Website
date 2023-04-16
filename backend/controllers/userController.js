@@ -89,7 +89,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
     }
 })
 
-//reser Password
+//reset Password
 exports.resetPassword = catchAsyncError(async (req, res, next) => {
     // Creating token hash
     const resetPasswordToken = crypto
@@ -118,3 +118,60 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
     sendToken(user, 200, res);
 
 });
+
+
+// Get user details
+exports.getUserDetails = catchAsyncError(async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+
+    res.status(200).json({
+        success: true,
+        user,
+    })
+})
+
+
+
+// Update user Password
+exports.updatePassowrd = catchAsyncError(async (req, res, next) => {
+    const user = await User.findById(req.user.id).select("+password");
+    const { oldPassword } = req.body;
+    const isPasswordMatched = await user.comparePassword(oldPassword)
+    if (!isPasswordMatched) {
+        return next(new ErrorHandler("Old Password Is Incorrect", 400));
+    }
+
+    const { newPassword, confirmNewPassword } = req.body;
+    if (newPassword !== confirmNewPassword) {
+        return next(new ErrorHandler("Password Does Not Mach", 400));
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    sendToken(user, 200, res);
+
+    res.status(200).json({
+        success: true,
+        user,
+    })
+})
+
+// Update user Profile 
+exports.updateProfile = catchAsyncError(async (req, res, next) => {
+    const updatedUserData = {
+        name: req.body.name,
+        email: req.body.email,
+    }
+    // we will add cloudinary later
+
+    const user = await User.findByIdAndUpdate(req.user.id, updatedUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false,
+    })
+    res.status(200).json({
+        success: true,
+    })
+})
+

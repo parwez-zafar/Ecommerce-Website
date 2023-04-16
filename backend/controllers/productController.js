@@ -17,24 +17,7 @@ const ApiFeatures = require('../utils/apifeature');
 // })
 
 // these are same 
-exports.createProduct = async (req, res, next) => {
-    try {
-        req.body.user = req.user.id;
-        const product = await Product.create(req.body);
 
-        res.status(201).json({
-            success: true,
-            product
-        })
-    }
-    catch (err) {
-        res.status(400).json({
-            success: false,
-            message: err
-        })
-    }
-
-}
 
 // Get All Product
 exports.getAllProducts = catchAsyncError(async (req, res) => {
@@ -68,45 +51,104 @@ exports.getProductDetails = catchAsyncError(async (req, res, next) => {
 })
 
 
-// Update Product -- Admin
-exports.updateProduct = catchAsyncError(async (req, res, next) => {
-    let product = await Product.findById(req.params.id);
+// Create New Review or Update the review
+exports.createProductReview = catchAsyncError(async (req, res, next) => {
+    const { rating, comment, productId } = req.body;
+    const review = {
+        user: req.user._id,
+        name: req.user.name,
+        rating: Number(rating),
+        comment,
+    }
+    const product = await Product.findById(productId);
 
-    if (!product) {
-        return next(new ErrorHandler("Product Not Found", 404))
+    const isReviewed = product.reviews.find((rev) => rev.user.toString() === req.user._id.toString());
+
+    if (isReviewed) {
+        product.reviews.forEach((rev) => {
+            if (rev.user.toString() === req.user._id.toString()) {
+                (rev.rating = rating), (rev.comment = comment);
+            }
+        })
+    }
+    else {
+        product.reviews.push(review);
+        product.numOfReviews = product.reviews.length;
     }
 
-    product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    let avg = 0;
+    product.ratings = product.reviews.forEach((rev) => {
+        avg += rev.rating;
+    })
+    product.ratings = avg / product.reviews.length;
+    await product.save({ validateBeforeSave: false });
+
+    res.status(200).json({
+        success: true,
+    })
+});
+
+
+// Get All reviews of a product
+exports.getProductReview = catchAsyncError(async (req, res, next) => {
+    const product = await Product.findById(req.query.id);
+    if (!product) {
+        return next(new ErrorHandler("Product Not Found", 404));
+    }
+
+    res.status(200).json({
+        success: true,
+        reviews: product.reviews,
+    });
+});
+
+// Delete Review
+exports.deleteReview = catchAsyncError(async (req, res, next) => {
+
+    const product = await Product.findById(req.query.productId);
+    if (!product) {
+        return next(new ErrorHandler("Product Not Found", 404));
+    }
+
+    let userId = product.reviews;
+    const loginId = req.user.id;
+
+    product.reviews.forEach((rev) => {
+        if (rev.id.toString() === req.query.reviewId.toString())
+            userId = rev.user.toString();
+    })
+    console.log(userId);
+    console.log(loginId);
+    if (userId !== loginId) {
+        return next(new ErrorHandler("You Are Not Allowed To Delete This Review", 405))
+    }
+
+    const reviews = product.reviews.filter((rev) => rev._id.toString() !== req.query.reviewId.toString());
+
+
+    let avg = 0;
+    reviews.forEach((rev) => {
+        avg += rev.rating;
+    })
+    const ratings = avg / reviews.length;
+    const numOfReviews = reviews.length;
+    await Product.findByIdAndUpdate(req.query.productId, {
+        reviews,
+        ratings,
+        numOfReviews,
+    }, {
         new: true,
         runValidators: true,
-        useFindAndModify: false
-    })
-
-    res.status(200).json({
-        success: true,
-        product
-    })
-})
-
-
-// Delete Product -- Admin
-
-exports.deleteProduct = catchAsyncError(async (req, res, next) => {
-    // try {
-
-    // } catch (err) {
-    //     console.log("error " + err);
-    // }
-
-    const product = await Product.findById(req.params.id);
-
-    if (!product) {
-        return next(new ErrorHandler("Product Not Found", 404))
+        useFineAndModify: false
     }
-    await Product.deleteOne({ "_id": req.params.id });
+    )
+
+    // console.log(numOfReviews);
+
+
 
     res.status(200).json({
         success: true,
-        message: "Product Delete Successfully",
-    });
+    })
 })
+

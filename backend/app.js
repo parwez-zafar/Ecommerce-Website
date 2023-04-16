@@ -10,6 +10,7 @@ app.use(cookieParser());
 // router imports
 const product = require('./routes/productRoute');
 const user = require('./routes/userRouter');
+const admin = require('./routes/adminRoute');
 // const cookieParser = require('cookie-parser');
 
 
@@ -17,6 +18,7 @@ const user = require('./routes/userRouter');
 
 app.use('/api/v1', product);
 app.use('/api/v1', user);
+app.use('/api/v1', admin);
 
 
 // middleware for error
