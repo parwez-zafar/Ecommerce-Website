@@ -11,6 +11,8 @@ app.use(cookieParser());
 const product = require('./routes/productRoute');
 const user = require('./routes/userRouter');
 const admin = require('./routes/adminRoute');
+const order = require('./routes/orderRoute');
+
 // const cookieParser = require('cookie-parser');
 
 
@@ -19,6 +21,7 @@ const admin = require('./routes/adminRoute');
 app.use('/api/v1', product);
 app.use('/api/v1', user);
 app.use('/api/v1', admin);
+app.use('/api/v1', order);
 
 
 // middleware for error

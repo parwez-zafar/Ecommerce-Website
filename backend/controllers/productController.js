@@ -117,8 +117,8 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
         if (rev.id.toString() === req.query.reviewId.toString())
             userId = rev.user.toString();
     })
-    console.log(userId);
-    console.log(loginId);
+    // console.log(userId);
+    // console.log(loginId);
     if (userId !== loginId) {
         return next(new ErrorHandler("You Are Not Allowed To Delete This Review", 405))
     }
