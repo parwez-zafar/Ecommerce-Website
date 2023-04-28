@@ -86,6 +86,11 @@ async function updateStock(id, quantity) {
 // Update Order Status  -- Admin
 exports.updateOrder = catchAsyncError(async (req, res, next) => {
     const order = await Order.findById(req.params.id);
+    if (!order) {
+        return next(new ErrorHandler("Order Not Found With This Id ", 404));
+    }
+
+
 
     if (order.orderStatus == "Delivered") {
         return next(new ErrorHandler("You Have Already Delivered This Order.", 404));
