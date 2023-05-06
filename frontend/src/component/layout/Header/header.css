@@ -5,12 +5,14 @@
 }
 
 .logo:hover {
-    width: 9vmax;
+    width: 9vmax !important;
 }
 
 .navbar {
-    background-color: rgb(34, 33, 33);
-    color: white;
+    /* background-color: rgb(34, 33, 33); */
+    /* color: white; */
+    /* height: 6vmax !important; */
+    /* margin-bottom: 0 !important; */
 }
 
 .nav-link {
@@ -28,4 +30,11 @@
 
 .btn:hover {
     background-color: #eb4034 !important;
+}
+
+.rows {
+    width: 100%;
+    margin: auto;
+    border: 2px solid red;
+
 }
