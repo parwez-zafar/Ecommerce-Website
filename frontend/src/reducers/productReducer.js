@@ -47,6 +47,7 @@ export const productReducer = createReducer(inititalProductState, {
             loading: false,
             products: action.payload.products,
             productCount: action.payload.productCount,
+            resultPerPage: action.payload.resultPerPage,
         }
     },
     ALL_PRODUCT_FAIL: (state, action) => {
@@ -55,7 +56,7 @@ export const productReducer = createReducer(inititalProductState, {
             error: action.payload
         }
     },
-    CLEAR_ERROR: (state, action) => {
+    CLEAR_ERRORS: (state, action) => {
         return {
             ...state,
             error: null,
@@ -86,7 +87,7 @@ export const productDetailsReducer = createReducer(inititalproductDetailsState, 
             error: action.payload,
         }
     },
-    CLEAR_ERROR: (state, action) => {
+    CLEAR_ERRORS: (state, action) => {
         return {
             ...state,
             error: null,

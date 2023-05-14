@@ -2,12 +2,12 @@ import React, { useEffect } from 'react'
 // import { Link } from 'react-router-dom'
 // import { CgMouse } from 'react-icons/cg';
 import './Home.css'
-import Product from './Product.js';
 import MetaData from '../layout/MetaData';
-import { getProduct } from '../../actions/productAction';
+import { clearErrors, getProduct } from '../../actions/productAction';
 import { useSelector, useDispatch } from 'react-redux'
 import Loader from '../layout/Loader/Loader';
 import { useAlert } from 'react-alert';
+import ProductCard from './ProductCard';
 // const product = {
 //     name: 'Red Shirt',
 //     images: [{ url: "https://i.ibb.co/DRST11n/1.webp" }],
@@ -19,12 +19,24 @@ const Home = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
     const { loading, error, products, productCount } = useSelector((state) => state.products)
+    // console.log("loading is ", loading);
+    // console.log("error is ", error);
+    // console.log("products is ", products);
+    // console.log("productCount is ", productCount);
     useEffect(() => {
+
+        dispatch(getProduct())
+    }, [dispatch])
+
+    useEffect(() => {
+
         if (error) {
-            return alert.error(error);
+            // console.log("home error ", error);
+            alert.error(error);
+            dispatch(clearErrors())
         }
-        dispatch(getProduct());
-    }, [dispatch, error, alert])
+    }, [error, dispatch, alert])
+
 
 
 
@@ -50,7 +62,7 @@ const Home = () => {
                         {
                             products && products.map((product) => {
                                 return (
-                                    <Product product={product} key={product._id} />
+                                    <ProductCard product={product} key={product._id} />
                                 )
                             })
                         }
