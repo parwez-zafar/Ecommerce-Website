@@ -18,7 +18,7 @@ import ProductCard from './ProductCard';
 const Home = () => {
     const alert = useAlert();
     const dispatch = useDispatch();
-    const { loading, error, products, productCount } = useSelector((state) => state.products)
+    const { loading, error, products } = useSelector((state) => state.products)
     // console.log("loading is ", loading);
     // console.log("error is ", error);
     // console.log("products is ", products);
