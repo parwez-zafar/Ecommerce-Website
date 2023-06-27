@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 // import Dropdown from "./DropDown";
 import { Fragment, useState } from "react";
 // import { AiOutlineSearchs } from 'react-icons/fa';
-import { AiOutlineSearch } from "react-icons/ai";
+// import { AiOutlineSearch } from "react-icons/ai";
 // import { CgProfile } from "react-icons/cg";
 import logo from '../../../images/logo.png';
 import './header.css';
 import { useNavigate } from 'react-router-dom';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Header = () => {
     const [showCollapsedMenu, setshowCollapsedMenu] = useState(false);
@@ -69,8 +70,11 @@ const Header = () => {
 
                     </form>
                     <ul className="navbar-nav">
+                        <li className="nav-item active">
+                            <Link className="nav-link" to="/login"> <AccountCircleIcon /> </Link>
+                        </li>
                         {/* <li className="nav-item active">
-                            <Link className="nav-link" to=""><CgProfile /> <span className="sr-only">(current)</span></Link>
+                            <Link className="nav-link" to="/register"> Sign Up </Link>
                         </li> */}
                         {/* <li className="nav-item">
                             <Link className="nav-link profile-logo" to="#"><CgProfile /></Link>

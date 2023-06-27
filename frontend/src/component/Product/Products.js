@@ -129,7 +129,7 @@ const Products = () => {
                         </div>
 
                         {
-                            (resultPerPage < count)
+                            (resultPerPage < productCount)
 
                             &&
                             (

@@ -36,7 +36,7 @@ const inititalProductState = {
     products: []
 }
 export const productReducer = createReducer(inititalProductState, {
-    ALL_PRODUCT_REQUEST: (state, payload) => {
+    ALL_PRODUCT_REQUEST: (state, action) => {
         return {
             loading: true,
             product: []

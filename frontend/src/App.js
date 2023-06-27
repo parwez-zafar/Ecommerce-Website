@@ -9,6 +9,7 @@ import ProductDetails from './component/Product/ProductDetails';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Products from './component/Product/Products';
 import Search from './component/Product/Search.js'
+import LoginSignup from './component/User/LoginSignup';
 // useEffect
 function App() {
 
@@ -37,7 +38,7 @@ function App() {
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
 
-          {/* <Route exact path='/search' element={<Search />} /> */}
+          <Route exact path='/login' element={<LoginSignup />} />
         </Routes>
 
 
