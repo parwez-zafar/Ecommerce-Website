@@ -8,7 +8,7 @@ import ProductDetails from './component/Product/ProductDetails';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Products from './component/Product/Products';
-import Search from './component/Product/Search.js'
+// import Search from './component/Product/Search.js'
 import LoginSignup from './component/User/LoginSignup';
 // useEffect
 function App() {

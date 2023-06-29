@@ -34,7 +34,7 @@ const Products = () => {
         error,
         productCount,
         resultPerPage,
-        filteredProductsCount
+        // filteredProductsCount
     } = useSelector((state) => state.products);
 
     const { keyword } = useParams();
@@ -60,7 +60,7 @@ const Products = () => {
 
     }
 
-    let count = filteredProductsCount;
+    // let count = filteredProductsCount;
 
 
     return (

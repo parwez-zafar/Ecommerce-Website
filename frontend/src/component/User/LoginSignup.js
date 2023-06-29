@@ -5,7 +5,7 @@ import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FaceIcon from '@mui/icons-material/Face';
 import { useDispatch, useSelector } from 'react-redux'
-import { clearErrors, login } from '../../actions/userAction';
+import { clearErrors, login, register } from '../../actions/userAction';
 import { useAlert } from 'react-alert';
 import Loader from '../layout/Loader/Loader';
 
@@ -29,8 +29,8 @@ const LoginSignup = () => {
         password: "",
     })
     const { name, email, password } = user;
-    const [avtar, setAvtar] = useState();
-    const [avtarPreview, setAvtartPreview] = useState("/Profile.png");
+    const [avatar, setAvatar] = useState();
+    const [avatarPreview, setAvatartPreview] = useState("/Profile.png");
 
     const loginSubmit = (e) => {
         // console.log("login form submitted");
@@ -45,17 +45,17 @@ const LoginSignup = () => {
         myForm.set('name', name);
         myForm.set('email', email);
         myForm.set('password', password);
-        myForm.set('avtar', avtar);
-        console.log("signup form submitted");
-
+        myForm.set('avatar', avatar);
+        console.log(myForm);
+        dispatch(register(myForm))
     }
     const registerDataChange = (e) => {
-        if (e.target.name === avtar) {
+        if (e.target.name === "avatar") {
             const reader = new FileReader();
             reader.onload = () => {
                 if (reader.readyState === 2) {
-                    setAvtartPreview(reader.result);
-                    setAvtar(reader.result);
+                    setAvatartPreview(reader.result);
+                    setAvatar(reader.result);
                 }
             };
             reader.readAsDataURL(e.target.files[0]);
@@ -74,7 +74,7 @@ const LoginSignup = () => {
         if (isAuthenticated) {
             navigate('/account')
         }
-    }, [dispatch, error, alert]);
+    }, [dispatch, error, alert, isAuthenticated, navigate]);
 
     const switchTab = (e, tab) => {
         if (tab === "login") {
@@ -184,13 +184,13 @@ const LoginSignup = () => {
                                     </div>
 
                                     <div id="registerImage">
-                                        <img src={avtarPreview} alt="Avtar Preview" />
-                                        <input type="file"
-                                            name='avtar'
-                                            accept='image/*'
+                                        <img src={avatarPreview} alt="Avatar Preview" />
+                                        <input
+                                            type="file"
+                                            name="avatar"
+                                            accept="image/*"
                                             onChange={registerDataChange}
                                         />
-
                                     </div>
                                     <input type="submit"
                                         value="Register"
