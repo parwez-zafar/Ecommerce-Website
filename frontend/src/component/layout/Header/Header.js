@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 // import Dropdown from "./DropDown";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 // import { AiOutlineSearchs } from 'react-icons/fa';
 // import { AiOutlineSearch } from "react-icons/ai";
 // import { CgProfile } from "react-icons/cg";
@@ -8,9 +8,15 @@ import logo from '../../../images/logo.png';
 import './header.css';
 import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import UserOptions from "./UserOptions";
+import { useSelector } from "react-redux";
+
 
 const Header = () => {
     const [showCollapsedMenu, setshowCollapsedMenu] = useState(false);
+    const { isAuthenticated, user } = useSelector((state) => state.user);
+
+
     const toggleMenu = () => {
         setshowCollapsedMenu(!showCollapsedMenu);
     }
@@ -28,6 +34,7 @@ const Header = () => {
             navigate('/products');
         }
     }
+
 
     return (
         <>
@@ -61,7 +68,7 @@ const Header = () => {
                         {/* <Dropdown /> */}
 
                     </ul>
-                    <form className=" my-2 my-lg-0 d-flex " onSubmit={searchSubmitHandler}>
+                    <form className=" my-2 my-lg-0 d-flex" onSubmit={searchSubmitHandler}>
 
                         <input className="col-lg" type="text" placeholder='Search a Product ...' aria-label="Search" value={keyword}
                             onChange={(e) => setKeyword(e.target.value)}
@@ -70,23 +77,22 @@ const Header = () => {
 
                     </form>
                     <ul className="navbar-nav">
-                        <li className="nav-item active">
-                            <Link className="nav-link" to="/login"> <AccountCircleIcon /> </Link>
-                        </li>
-                        {/* <li className="nav-item active">
-                            <Link className="nav-link" to="/register"> Sign Up </Link>
-                        </li> */}
-                        {/* <li className="nav-item">
-                            <Link className="nav-link profile-logo" to="#"><CgProfile /></Link>
-                        </li> */}
-                        {/* <li className="nav-item">
-                            <Link className="nav-link" to="#">Contact</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link" to="#">About</Link>
-                        </li> */}
+                        {
+                            isAuthenticated ? < UserOptions className="userOption" user={user} /> :
+
+                                <li className="nav-item active">
+
+
+                                    <Link className="nav-link" to="/login"> <AccountCircleIcon /> </Link>
+
+                                </li>
+                        }
+
                     </ul>
+
                 </div>
+
+
             </nav>
         </>
     );

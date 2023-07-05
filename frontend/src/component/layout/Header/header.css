@@ -9,9 +9,10 @@
 }
 
 .navbar {
-    /* background-color: rgb(34, 33, 33); */
+    /* background-color: rgb(34, 33, 33) !important; */
+    /* border: 2px solid red !important; */
     /* color: white; */
-    /* height: 6vmax !important; */
+    height: auto !important;
     /* margin-bottom: 0 !important; */
 }
 
@@ -37,4 +38,34 @@
     margin: auto;
     border: 2px solid red;
 
+}
+
+
+/* .userOption {
+    border: 2px solid black;
+} */
+
+
+
+.speedDialIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    /* display: none; */
+    /* border: 2px solid red; */
+}
+
+.speedDial>button {
+    background-color: #f8f9fa;
+    width: 50px;
+    height: 50px;
+
+}
+
+.speedDial {
+    /* border: 2px solid red; */
+    height: 0;
+    /* background-color: white; */
+    margin-left: 2vmax;
+    margin-bottom: 2vmax;
 }

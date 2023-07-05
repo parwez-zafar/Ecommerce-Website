@@ -10,8 +10,23 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Products from './component/Product/Products';
 // import Search from './component/Product/Search.js'
 import LoginSignup from './component/User/LoginSignup';
+import Profile from './component/User/Profile.js'
+import { useSelector } from 'react-redux';
+import store from './store';
+import { loadUser } from './actions/userAction';
+
+
+
+
 // useEffect
 function App() {
+
+
+  // console.log("user -> ", user);
+
+
+  const { user } = useSelector((state) => state.user);
+
 
   useEffect(() => {
     WebFont.load({
@@ -19,12 +34,15 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+    store.dispatch(loadUser());
+
   }, []);
   return (
     <>
 
       <Router>
         <Header />
+
 
 
         <Routes>
@@ -37,6 +55,9 @@ function App() {
 
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
+
+
+          <Route exact path='/account' element={<Profile />} />
 
           <Route exact path='/login' element={<LoginSignup />} />
         </Routes>
