@@ -8,7 +8,7 @@ import "./Profile.css"
 const Profile = () => {
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     const navigate = useNavigate();
-    console.log("authenticated is ", isAuthenticated);
+    // console.log("authenticated is ", isAuthenticated);
     useEffect(() => {
         if (isAuthenticated === false)
             navigate('/login')
@@ -42,7 +42,7 @@ const Profile = () => {
                                     </div>
                                     <div>
                                         <h4>Joined On</h4>
-                                        <p>{String(user.CreatedAt).substr(0, 10)}</p>
+                                        <p>{String(user.createdAt).substr(0, 10)}</p>
                                     </div>
                                     <div>
                                         <Link to="/orders" >My Orders</Link>

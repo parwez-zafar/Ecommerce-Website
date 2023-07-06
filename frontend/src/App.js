@@ -14,6 +14,8 @@ import Profile from './component/User/Profile.js'
 import { useSelector } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/userAction';
+import UpdateProfile from './component/User/UpdateProfile.js'
+// import ProtectedRoute from './component/Route/ProtectedRoute';
 
 
 
@@ -25,7 +27,7 @@ function App() {
   // console.log("user -> ", user);
 
 
-  const { user } = useSelector((state) => state.user);
+  const { isAuthenticated } = useSelector((state) => state.user);
 
 
   useEffect(() => {
@@ -56,10 +58,19 @@ function App() {
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
 
+          {
+            isAuthenticated && (
+              <Route exact path='/account' element={<Profile />} />
+            )
+          }
 
-          <Route exact path='/account' element={<Profile />} />
-
+          {
+            isAuthenticated && (
+              <Route exact path='/me/update' element={<UpdateProfile />} />
+            )
+          }
           <Route exact path='/login' element={<LoginSignup />} />
+
         </Routes>
 
 

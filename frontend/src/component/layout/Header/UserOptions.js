@@ -29,9 +29,12 @@ function UserOptions({ user }) {
     const account = () => {
         navigate("/account")
     }
-    const logoutUser = () => {
-        dispatch(logout());
+    const logoutUser = async () => {
+        await dispatch(logout());
         alert.success("Logout Successfully")
+        console.log("okey");
+        navigate('/login')
+
     }
 
 

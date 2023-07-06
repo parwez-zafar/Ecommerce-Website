@@ -78,7 +78,7 @@ const Header = () => {
                     </form>
                     <ul className="navbar-nav">
                         {
-                            isAuthenticated ? < UserOptions className="userOption" user={user} /> :
+                            isAuthenticated ? <UserOptions className="userOption" user={user} /> :
 
                                 <li className="nav-item active">
 
