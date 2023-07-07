@@ -24,7 +24,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { productDetailsReducer, productReducer } from './reducers/productReducer';
-import { profileReducer, userReducer } from "./reducers/userReducer";
+import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 
 
 const store = configureStore({
@@ -33,6 +33,7 @@ const store = configureStore({
         productDetails: productDetailsReducer,
         user: userReducer,
         profile: profileReducer,
+        forgotPassword: forgotPasswordReducer,
 
     },  // it can use multiple reducer and combine itself
 });

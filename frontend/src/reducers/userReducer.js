@@ -168,3 +168,63 @@ export const profileReducer = createReducer(inititalProfileState, {
     }
 
 });
+
+
+
+
+
+const inititalForgotPasswordState = {}
+export const forgotPasswordReducer = createReducer(inititalForgotPasswordState, {
+    FORGOT_PASSWORD_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true,
+            error: null
+        }
+    },
+    FORGOT_PASSWORD_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            message: action.payload,
+        };
+    },
+    FORGOT_PASSWORD_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        };
+    },
+    RESET_PASSWORD_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true,
+            error: null,
+        }
+    },
+
+    RESET_PASSWORD_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            success: action.payload
+        }
+    },
+
+    RESET_PASSWORD_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+    },
+
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    }
+
+});

@@ -78,7 +78,6 @@ const UpdateProfile = () => {
                                 <h2 className='updateProfileHeading' >Update Profile</h2>
                                 <form
                                     className="updateProfileForm"
-                                    encType='multipart/form-data'
                                     onSubmit={updateProfileSubmit}
                                 >
 

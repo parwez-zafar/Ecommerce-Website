@@ -11,7 +11,6 @@ import Loader from '../layout/Loader/Loader';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import LockIcon from '@mui/icons-material/Lock';
-import VisibilityIcon from '@mui/icons-material/Visibility';
 
 
 const UpdatePassword = () => {
