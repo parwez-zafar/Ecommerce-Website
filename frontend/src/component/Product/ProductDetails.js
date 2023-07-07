@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import './ProductDetails.css'
 import { useDispatch, useSelector } from 'react-redux'
@@ -9,14 +9,33 @@ import ReviewCard from './ReviewCard.js'
 import Loader from '../layout/Loader/Loader';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
+import { addToCart } from '../../actions/cartAction'
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
 
-    const { id } = useParams();
+
     const dispatch = useDispatch();
     const { loading, error, product } = useSelector((state) => state.productDetails)
     // console.log(product);
+    const [quantity, setQuantity] = useState(1);
     const alert = useAlert();
+
+    const increaseQuantity = () => {
+        if (quantity >= product.stock) return;
+        setQuantity(quantity + 1);
+    };
+
+    const decreaseQuantity = () => {
+        if (quantity > 1)
+            setQuantity(quantity - 1);
+    };
+
+
+    const { id } = useParams();
+    const addToCartHandeler = async () => {
+        await dispatch(addToCart(id, quantity));
+        alert.success("Item Added To Cart");
+    }
 
     useEffect(() => {
 
@@ -41,13 +60,13 @@ const ProductDetails = ({ match }) => {
     }
 
     return (
-        <>
+        <Fragment>
             {
                 loading
                     ? <Loader />
                     :
                     (
-                        <>
+                        <Fragment>
                             <MetaData title={`${product.name} -- ECOMMERCE`} />
 
                             <div className="productDetails">
@@ -83,11 +102,11 @@ const ProductDetails = ({ match }) => {
                                         <h1>{`₹${product.price}`}</h1>
                                         <div className="detailsBlock-3-1">
                                             <div className="detailsBlock-3-1-1">
-                                                <button>-</button>
-                                                <input type="number" value={1} />
-                                                <button>+</button>
+                                                <button onClick={decreaseQuantity} >-</button>
+                                                <input readOnly type="number" value={quantity} />
+                                                <button onClick={increaseQuantity} >+</button>
                                             </div>
-                                            <button>Add to Cart</button>
+                                            <button onClick={addToCartHandeler} >Add to Cart</button>
 
                                         </div>
                                         <p>
@@ -125,10 +144,10 @@ const ProductDetails = ({ match }) => {
                                     )
 
                             }
-                        </>
+                        </Fragment>
                     )
             }
-        </>
+        </Fragment >
     )
 }
 

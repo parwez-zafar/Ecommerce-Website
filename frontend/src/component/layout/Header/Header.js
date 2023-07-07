@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import UserOptions from "./UserOptions";
 import { useSelector } from "react-redux";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 const Header = () => {
@@ -57,7 +58,7 @@ const Header = () => {
                             <Link className="nav-link" to="/">Home</Link>
                         </li>
                         <li className="">
-                            <Link className="nav-link" to="/products">products</Link>
+                            <Link className="nav-link" to="/products">Products</Link>
                         </li>
                         <li className="nav-item">
                             <Link className="nav-link" to="/contact">Contact</Link>
@@ -87,6 +88,10 @@ const Header = () => {
 
                                 </li>
                         }
+
+                        <li className="nav-item">
+                            <Link className="nav-link" to="/cart"><div style={{ display: 'flex', width: '5vmax' }}> <ShoppingCartIcon /> {" Cart"}</div></Link>
+                        </li>
 
                     </ul>
 
