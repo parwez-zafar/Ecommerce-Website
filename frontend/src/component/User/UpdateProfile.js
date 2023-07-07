@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import './LoginSignup.css';
 import { useNavigate } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import FaceIcon from '@mui/icons-material/Face';

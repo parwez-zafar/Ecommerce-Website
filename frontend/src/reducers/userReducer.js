@@ -133,6 +133,33 @@ export const profileReducer = createReducer(inititalProfileState, {
             error: action.payload,
         };
     },
+
+    UPDATE_PASSWORD_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    UPDATE_PASSWORD_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            isUpdated: action.payload,
+        };
+    },
+    UPDATE_PASSWORD_RESET: (state, action) => {
+        return {
+            ...state,
+            isUpdated: false,
+        };
+    },
+    UPDATE_PASSWORD_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        };
+    },
     CLEAR_ERRORS: (state, action) => {
         return {
             ...state,
