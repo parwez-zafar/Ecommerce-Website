@@ -4,13 +4,15 @@ import CartItemCard from './CartItemCard.js';
 import { useDispatch, useSelector } from 'react-redux'
 import { addToCart, removeItemFromCart } from '../../actions/cartAction'
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Typography } from '@mui/material';
+import MetaData from '../layout/MetaData';
 
 
 const Cart = () => {
     const dispatch = useDispatch();
     const { cartItems } = useSelector((state) => state.cart)
+    const navigate = useNavigate();
 
     const increaseQuantity = (id, quantity, stock) => {
         const newqty = quantity + 1;
@@ -29,8 +31,14 @@ const Cart = () => {
     const deleteCartItems = (id) => {
         dispatch(removeItemFromCart(id));
     };
+
+    const checkoutHandler = () => {
+        navigate('/login?redirect=shipping')
+    }
+
     return (
         <Fragment>
+            <MetaData title={"Cart"} />
             {
                 cartItems.length === 0 ? (
                     <div className="emptyCart">
@@ -78,7 +86,7 @@ const Cart = () => {
                                 </div>
                                 <div></div>
                                 <div className="checkOutBtn">
-                                    <button>Check Out</button>
+                                    <button onClick={checkoutHandler}>Check Out</button>
                                 </div>
                             </div>
 

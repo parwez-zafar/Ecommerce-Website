@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Header from './component/layout/Header/Header'
 import WebFont from "webfontloader";
@@ -19,7 +19,14 @@ import UpdatePassword from './component/User/UpdatePassword.js'
 import ForgotPassword from './component/User/ForgotPassword.js'
 import ResetPassword from './component/User/ResetPassword.js'
 import Cart from './component/Cart/Cart.js';
+import Shipping from './component/Cart/Shipping.js';
 // import ProtectedRoute from './component/Route/ProtectedRoute';
+import ConfirmOrder from './component/Cart/ConfirmOrder'
+import axios from 'axios';
+import Payment from './component/Cart/Payment.js'
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
+import OrderSuccess from './component/Cart/OrderSuccess.js'
 
 
 
@@ -29,6 +36,14 @@ function App() {
 
 
   // console.log("user -> ", user);
+
+  const [stripeApiKey, setStripeApiKey] = useState();
+
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get('/api/v1/stripeapikey');
+    setStripeApiKey(data.stripeApiKey)
+  }
 
 
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -41,7 +56,7 @@ function App() {
       },
     });
     store.dispatch(loadUser());
-
+    getStripeApiKey();
   }, []);
   return (
     <>
@@ -77,6 +92,29 @@ function App() {
           {
             isAuthenticated && (
               <Route exact path='/password/update' element={<UpdatePassword />} />
+            )
+          }
+
+          {
+            isAuthenticated && (
+              <Route exact path='/shipping' element={<Shipping />} />
+            )
+          }
+
+          {
+            isAuthenticated && (
+              <Route exact path='/order/confirm' element={<ConfirmOrder />} />
+            )
+          }
+          {
+            isAuthenticated && stripeApiKey && (
+              <Route exact path='/process/payment' element={<Elements stripe={loadStripe(stripeApiKey)}> <Payment /></Elements>} />
+            )
+          }
+
+          {
+            isAuthenticated && (
+              <Route exact path='/success' element={<OrderSuccess />} />
             )
           }
 

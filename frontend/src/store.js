@@ -41,14 +41,21 @@ import { configureStore } from "@reduxjs/toolkit";
 import { productDetailsReducer, productReducer } from './reducers/productReducer';
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from './reducers/cartReducer';
+import { newOrderReducer } from './reducers/orderReducer';
 let initialState = {
     cart: {
         cartItems: localStorage.getItem("cartItems")
             ?
             JSON.parse(localStorage.getItem("cartItems"))
-            : []
+            : [],
 
-    }
+        shippingInfo: localStorage.getItem("shippingInfo")
+            ?
+            JSON.parse(localStorage.getItem("shippingInfo"))
+            :
+            {},
+    },
+
 };
 
 const store = configureStore({
@@ -58,7 +65,9 @@ const store = configureStore({
         user: userReducer,
         profile: profileReducer,
         forgotPassword: forgotPasswordReducer,
-        cart: cartReducer
+        cart: cartReducer,
+        newOrder: newOrderReducer
+
 
     },  // it can use multiple reducer and combine itself
     preloadedState: initialState

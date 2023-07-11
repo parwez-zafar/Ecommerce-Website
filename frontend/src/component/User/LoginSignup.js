@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react';
 import './LoginSignup.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import FaceIcon from '@mui/icons-material/Face';
@@ -13,6 +13,7 @@ import Loader from '../layout/Loader/Loader';
 const LoginSignup = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
+    const location = useLocation();
     const { error, loading, isAuthenticated } = useSelector((state) => state.user)
     let navigate = useNavigate();
 
@@ -66,15 +67,21 @@ const LoginSignup = () => {
         }
     }
 
+    const redirect = location.search ? location.search.split("=")[1] : "/account"
+    // console.log(redirect); 
+
     useEffect(() => {
         if (error) {
             alert.error(error);
             dispatch(clearErrors());
         }
+        // console.log(redirect);
         if (isAuthenticated) {
-            navigate('/account')
+            if (redirect === 'shipping')
+                return navigate("/shipping")
+            navigate(redirect);
         }
-    }, [dispatch, error, alert, isAuthenticated, navigate]);
+    }, [dispatch, redirect, error, alert, isAuthenticated, navigate]);
 
     const switchTab = (e, tab) => {
         if (tab === "login") {

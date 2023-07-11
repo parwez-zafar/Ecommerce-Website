@@ -2,7 +2,11 @@ import { createReducer } from "@reduxjs/toolkit";
 
 
 const initialCartState = (
-    { cartItems: [] }
+    {
+        cartItems: [],
+        shippingInfo: {}
+
+    }
 );
 
 export const cartReducer = createReducer(initialCartState, {
@@ -33,6 +37,12 @@ export const cartReducer = createReducer(initialCartState, {
         return {
             ...state,
             cartItems: state.cartItems.filter((i) => i.product !== action.payload)
+        }
+    },
+    SAVE_SHIPPING_INFO: (state, action) => {
+        return {
+            ...state,
+            shippingInfo: action.payload,
         }
     }
 })
