@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Loader from '../layout/Loader/Loader';
 import "./Profile.css"
 
+
 const Profile = () => {
     const { user, loading, isAuthenticated } = useSelector((state) => state.user);
     const navigate = useNavigate();

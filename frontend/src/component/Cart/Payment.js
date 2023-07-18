@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 import { useAlert } from 'react-alert';
 import {
-    cardNumberElement,
+    // cardNumberElement,
     CardCvcElement,
     CardExpiryElement,
     useStripe,
@@ -22,81 +22,8 @@ import { clearErrors, createOrder } from '../../actions/orderAction';
 
 
 const Payment = () => {
-    // const dispatch = useDispatch();
-    // const alert = useAlert();
-    // const stripe = useStripe();
-    // const elements = useElements();
+
     const navigate = useNavigate();
-    // const payBtn = useRef(null);
-
-    // const { shippingInfo, cartItem } = useSelector((state) => state.cart);
-
-    // const { user } = useSelector((state) => state.user)
-
-    // const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-
-
-    // const paymentData = {
-    //     amount: Math.round(orderInfo.totalPrice * 100),
-    // }
-
-    // const submitHandler = async (e) => {
-    //     e.preventDefault();
-    //     payBtn.current.disable = true;
-
-    //     try {
-    //         const config = {
-    //             headers: {
-    //                 "Content-Type": "application/json"
-    //             },
-    //         }
-
-    //         const { data } = await axios.post(
-    //             "/api/v1/process/payment",
-    //             paymentData,
-    //             config
-    //         )
-
-    //         const client_secret = data.client_secret;
-
-    //         if (!stripe || !elements)
-    //             return;
-
-    //         const result = await stripe.confirmCardPayment(client_secret, {
-    //             payment_method: {
-    //                 card: elements.getElement(cardNumberElement),
-    //                 billing_details: {
-    //                     name: user.name,
-    //                     email: user.email,
-    //                     address: {
-    //                         line1: shippingInfo.address,
-    //                         city: shippingInfo.city,
-    //                         state: shippingInfo.state,
-    //                         postal_code: shippingInfo.pinCode,
-    //                         country: shippingInfo.country,
-    //                     }
-    //                 }
-    //             }
-    //         });
-
-    //         if (result.error) {
-    //             payBtn.current.disable = false;
-    //             alert.error(result.error.message)
-    //         }
-    //         else {
-    //             if (result.paymentIntent.status === "succeeded") {
-    //                 navigate('/success')
-    //             }
-    //             else {
-    //                 alert.error("There's some issue while processing payment.")
-    //             }
-    //         }
-    //     }
-    //     catch (error) {
-    //         payBtn.current.disable = false;
-    //         alert.error(error.response.data.message);
-    //     }
-    // }
 
 
     const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
@@ -172,7 +99,7 @@ const Payment = () => {
                         id: result.paymentIntent.id,
                         status: result.paymentIntent.status
                     }
-                    dispatch(createOrder(order))
+                    await dispatch(createOrder(order))
                     navigate('/success')
                 } else {
                     alert.error("There's some issue while processing payment ");

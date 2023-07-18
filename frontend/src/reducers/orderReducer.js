@@ -31,3 +31,64 @@ export const newOrderReducer = createReducer(initialState, {
         }
     }
 })
+
+
+const initialMyOrdersState = {
+    orders: [],
+}
+export const myOrdersReducer = createReducer(initialMyOrdersState, {
+    MY_ORDERS_REQUEST: (state, action) => {
+        return {
+            loading: true
+        }
+    },
+    MY_ORDERS_SUCCESS: (state, action) => {
+        return {
+            loading: false,
+            orders: action.payload
+        }
+    },
+    MY_ORDERS_FAIL: (state, action) => {
+        return {
+            loading: true,
+            error: action.payload
+        }
+    },
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    }
+})
+
+
+
+const initialOrdersDetailsState = {
+    orders: {},
+}
+export const orderDetailsReducer = createReducer(initialOrdersDetailsState, {
+    ORDER_DETAILS_REQUEST: (state, action) => {
+        return {
+            loading: true,
+        }
+    },
+    ORDER_DETAILS_SUCCESS: (state, action) => {
+        return {
+            loading: false,
+            order: action.payload
+        }
+    },
+    ORDER_DETAILS_FAIL: (state, action) => {
+        return {
+            loading: true,
+            error: action.payload
+        }
+    },
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    }
+})

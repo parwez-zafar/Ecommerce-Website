@@ -9,7 +9,7 @@ import ReviewCard from './ReviewCard.js'
 import Loader from '../layout/Loader/Loader';
 import { useAlert } from 'react-alert';
 import MetaData from '../layout/MetaData';
-import { addToCart } from '../../actions/cartAction'
+import { addToCart } from '../../actions/cartAction';
 
 const ProductDetails = () => {
 
@@ -42,7 +42,7 @@ const ProductDetails = () => {
         if (error) {
             return (
                 alert.error(error),
-                dispatch(clearErrors)
+                dispatch(clearErrors())
             )
         }
         dispatch(getProductDetails(id));
@@ -106,7 +106,7 @@ const ProductDetails = () => {
                                                 <input readOnly type="number" value={quantity} />
                                                 <button onClick={increaseQuantity} >+</button>
                                             </div>
-                                            <button onClick={addToCartHandeler} >Add to Cart</button>
+                                            <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandeler} >Add to Cart</button>
 
                                         </div>
                                         <p>

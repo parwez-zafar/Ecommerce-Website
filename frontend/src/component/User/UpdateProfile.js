@@ -29,7 +29,7 @@ const UpdateProfile = () => {
         myForm.set('name', name);
         myForm.set('email', email);
         myForm.set('avatar', avatar);
-        console.log(myForm);
+        console.log("form Data is ", myForm);
         dispatch(updateUserProfile(myForm))
     }
     const updateProfileDataChange = (e) => {
@@ -47,11 +47,14 @@ const UpdateProfile = () => {
 
     useEffect(() => {
         if (user) {
+            // console.log("setting");
             setName(user.name);
             setEmail(user.email);
             setAvatartPreview(user.avatar.url);
+            // console.log(name, email, avatarPreview);
         }
         if (error) {
+            console.log(error);
             alert.error(error);
             dispatch(clearErrors());
         }

@@ -94,4 +94,42 @@ export const productDetailsReducer = createReducer(inititalproductDetailsState, 
             error: null,
         }
     },
+});
+
+const initialNewReviewState = {
+
+}
+
+export const newReviewReducer = createReducer(initialNewReviewState, {
+    NEW_REVIEW_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    NEW_REVIEW_SUCCESS: (state, action) => {
+        return {
+            loading: false,
+            success: action.payload
+        }
+    },
+    NEW_REVIEW_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+    },
+    NEW_REVIEW_RESET: (state, action) => {
+        return {
+            ...state,
+            success: false,
+        }
+    },
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    },
 })

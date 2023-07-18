@@ -6,8 +6,8 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "@material/typography": "^14.0.0",
-    "@mui/material": "^5.12.3",
     "@mui/styles": "^5.12.3",
+    "@mui/x-data-grid": "^6.10.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
@@ -28,7 +28,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-rating-stars-component": "^2.2.0",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.10.0",
+    "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
@@ -60,5 +60,9 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://192.168.86.13:4000"
+  "proxy": "http://192.168.29.129:4000",
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
 }

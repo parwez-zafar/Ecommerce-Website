@@ -20,13 +20,15 @@ import ForgotPassword from './component/User/ForgotPassword.js'
 import ResetPassword from './component/User/ResetPassword.js'
 import Cart from './component/Cart/Cart.js';
 import Shipping from './component/Cart/Shipping.js';
-// import ProtectedRoute from './component/Route/ProtectedRoute';
+import { ProtectedRoute } from './component/Route/ProtectedRoute';
 import ConfirmOrder from './component/Cart/ConfirmOrder'
 import axios from 'axios';
 import Payment from './component/Cart/Payment.js'
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './component/Cart/OrderSuccess.js'
+import MyOrders from './component/Order/MyOrders.js'
+import OrderDetails from './component/Order/OrderDetails.js'
 
 
 
@@ -65,23 +67,32 @@ function App() {
         <Header />
 
 
-
         <Routes>
+
+
           <Route exact path='/' element={<Home />} />
-
-
           <Route exact path='/product/:id' element={<ProductDetails />} />
-
-
-
           <Route exact path='/products' element={<Products />} />
           <Route path='/products/:keyword' element={<Products />} />
+          <Route exact path='/login' element={<LoginSignup />} />
+          <Route exact path='/password/forgot' element={<ForgotPassword />} />
+          <Route exact path='/password/reset/:token' element={<ResetPassword />} />
+          <Route exact path='/cart' element={<Cart />} />
+
+
+
+
+          {/* <Route exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} /> */}
+          {/* <Route exact path='/me/update' element={<ProtectedRoute>  <UpdateProfile /></ProtectedRoute>} /> */}
+
 
           {
             isAuthenticated && (
               <Route exact path='/account' element={<Profile />} />
             )
           }
+
+
 
           {
             isAuthenticated && (
@@ -95,17 +106,15 @@ function App() {
             )
           }
 
-          {
+          {/* {
             isAuthenticated && (
               <Route exact path='/shipping' element={<Shipping />} />
             )
-          }
+          } */}
+          <Route exact path='/shipping' element={<ProtectedRoute>  <Shipping /></ProtectedRoute>} />
 
-          {
-            isAuthenticated && (
-              <Route exact path='/order/confirm' element={<ConfirmOrder />} />
-            )
-          }
+
+
           {
             isAuthenticated && stripeApiKey && (
               <Route exact path='/process/payment' element={<Elements stripe={loadStripe(stripeApiKey)}> <Payment /></Elements>} />
@@ -117,17 +126,30 @@ function App() {
               <Route exact path='/success' element={<OrderSuccess />} />
             )
           }
+          {
+            isAuthenticated && (
+              <Route exact path='/orders' element={<MyOrders />} />
+            )
+          }
+
+          {
+            isAuthenticated && (
+              <Route exact path='/orderDetail/:id' element={<OrderDetails />} />
+            )
+          }
+          {
+            isAuthenticated && (
+              <Route exact path='/order/confirm' element={<ConfirmOrder />} />
+            )
+          }
 
 
 
 
 
-          <Route exact path='/login' element={<LoginSignup />} />
-          <Route exact path='/password/forgot' element={<ForgotPassword />} />
-          <Route exact path='/password/reset/:token' element={<ResetPassword />} />
 
 
-          <Route exact path='/cart' element={<Cart />} />
+
 
         </Routes>
 
