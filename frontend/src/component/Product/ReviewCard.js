@@ -1,14 +1,13 @@
 import React from 'react';
-import ReactStarts from 'react-rating-stars-component';
+// import ReactStarts from 'react-rating-stars-component';
 // import profilePng from '../../images/Profile.png'
+import { Rating } from '@mui/material';
 const ReviewCard = ({ review }) => {
     const options = {
-        edit: false,
-        color: "rgba(20,20,20,0.1)",
-        activecolor: 'tomato',
-        size: window.innerWidth < 600 ? 20 : 25,
         value: review.rating,
-        isHalf: true,
+        size: "large",
+        readOnly: true,
+        precision: 0.5
     }
     // console.log("rev is ", review);
     return (
@@ -16,8 +15,8 @@ const ReviewCard = ({ review }) => {
             <div className="reviewCard">
                 <img src={review.image} alt="User" />
                 <p>{review.name}</p>
-                <ReactStarts {...options} />
-                <span>{review.comment}</span>
+                <Rating {...options} />
+                <span className='reviewCardComment' >{review.comment}</span>
             </div>
         </>
     )

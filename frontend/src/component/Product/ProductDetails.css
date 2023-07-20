@@ -154,6 +154,19 @@
     transform: scale(1.1);
 }
 
+.submitDialog {
+    display: flex;
+    flex-direction: column;
+}
+
+.submitDialogTextArea {
+    border: 1px solid rgba(0, 0, 0, 0.082);
+    margin: 1vmax 0;
+    outline: none;
+    padding: 1rem;
+    font: 300 1rem "Roboto";
+}
+
 .reviewHeading {
     color: #000000be;
     font: 500 1.4vmax "Roboto";
@@ -295,5 +308,13 @@
         padding: 1.5vmax;
         width: 20vmax;
         margin: 3vmax 0;
+    }
+
+    .reviewCard>p {
+        font: 600 3vw "Roboto";
+    }
+
+    .reviewCard>span {
+        font: 200 5vw cursive;
     }
 }
