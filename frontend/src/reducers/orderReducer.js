@@ -20,7 +20,7 @@ export const newOrderReducer = createReducer(initialState, {
     },
     CREATE_ORDER_FAIL: (state, action) => {
         return {
-            loading: true,
+            loading: false,
             error: action.payload
         }
     },
@@ -50,7 +50,7 @@ export const myOrdersReducer = createReducer(initialMyOrdersState, {
     },
     MY_ORDERS_FAIL: (state, action) => {
         return {
-            loading: true,
+            loading: false,
             error: action.payload
         }
     },
@@ -81,7 +81,7 @@ export const orderDetailsReducer = createReducer(initialOrdersDetailsState, {
     },
     ORDER_DETAILS_FAIL: (state, action) => {
         return {
-            loading: true,
+            loading: false,
             error: action.payload
         }
     },

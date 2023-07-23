@@ -29,6 +29,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './component/Cart/OrderSuccess.js'
 import MyOrders from './component/Order/MyOrders.js'
 import OrderDetails from './component/Order/OrderDetails.js'
+import Dashboard from './component/admin/Dashboard.js';
 
 
 
@@ -82,11 +83,36 @@ function App() {
 
 
 
-          {/* <Route exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} /> */}
-          {/* <Route exact path='/me/update' element={<ProtectedRoute>  <UpdateProfile /></ProtectedRoute>} /> */}
-
-
+          <Route exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+          <Route exact path='/me/update' element={<ProtectedRoute>  <UpdateProfile /></ProtectedRoute>} />
+          <Route exact path='/password/update' element={<ProtectedRoute>  <UpdatePassword /></ProtectedRoute>} />
+          <Route exact path='/shipping' element={<ProtectedRoute>  <Shipping /></ProtectedRoute>} />
           {
+            stripeApiKey &&
+            <Route exact path='/process/payment' element={<ProtectedRoute>  <Elements stripe={loadStripe(stripeApiKey)}> <Payment /></Elements></ProtectedRoute>} />
+          }
+          <Route exact path='/success' element={<ProtectedRoute>  <OrderSuccess /></ProtectedRoute>} />
+          <Route exact path='/orders' element={<ProtectedRoute>  <MyOrders /></ProtectedRoute>} />
+          <Route exact path='/orderDetail/:id' element={<ProtectedRoute>  <OrderDetails /></ProtectedRoute>} />
+          <Route exact path='/order/confirm' element={<ProtectedRoute>  <ConfirmOrder /></ProtectedRoute>} />
+
+
+
+          {/* Admin Route */}
+
+          <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true}>  <Dashboard /></ProtectedRoute>} />
+
+          {/* {
+            isAuthenticated && (
+              <Route exact path='/admin/dashboard' element={<Dashboard />} />
+            )
+          } */}
+
+
+
+
+
+          {/* {
             isAuthenticated && (
               <Route exact path='/account' element={<Profile />} />
             )
@@ -106,12 +132,12 @@ function App() {
             )
           }
 
-          {/* {
+          {
             isAuthenticated && (
               <Route exact path='/shipping' element={<Shipping />} />
             )
-          } */}
-          <Route exact path='/shipping' element={<ProtectedRoute>  <Shipping /></ProtectedRoute>} />
+          }
+
 
 
 
@@ -141,7 +167,14 @@ function App() {
             isAuthenticated && (
               <Route exact path='/order/confirm' element={<ConfirmOrder />} />
             )
-          }
+          } */}
+
+          {/* Admin Route */}
+          {/* {
+            isAuthenticated && (
+              <Route exact path='/admin/dashboard' element={<Dashboard />} />
+            )
+          } */}
 
 
 
