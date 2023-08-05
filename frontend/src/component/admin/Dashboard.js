@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import Sidebar from './Sidebar.js';
 import './dashboard.css'
 import { Typography } from '@mui/material';
@@ -7,12 +7,22 @@ import MetaData from '../layout/MetaData.js';
 import { Line, Doughnut } from 'react-chartjs-2';
 import { CategoryScale } from 'chart.js';
 import Chart from 'chart.js/auto';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAdminProducts } from '../../actions/productAction.js';
+import Loader from '../layout/Loader/Loader.js';
 
 Chart.register(CategoryScale);
 
 
 
 const Dashboard = () => {
+    const { loading, products } = useSelector((state) => state.products);
+    const dispatch = useDispatch();
+    let outOfStock = 0;
+    products && products.forEach((item) => {
+        if (item.stock === 0)
+            outOfStock += 1;
+    });
 
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
@@ -32,56 +42,65 @@ const Dashboard = () => {
             {
                 backgroundColor: ["#00A6B4", "#6800B4"],
                 hoverBackgroundColor: ["#4B5000", "#35014F"],
-                // data: [outOfStock, products.length - outOfStock],
-                data: [2, 10],
+                data: [outOfStock, products && products.length - outOfStock],
+
             },
         ],
     };
+
+    useEffect(() => {
+        dispatch(getAdminProducts());
+    }, [dispatch])
     return (
         <Fragment>
-            <div className="dashboard">
-                <MetaData title="Dashboard - Admin Panel" />
-                <Sidebar />
+            {
+                loading ? <Loader />
+                    :
+                    <div className="dashboard">
+                        <MetaData title="Dashboard - Admin Panel" />
+                        <Sidebar />
 
-                <div className="dashboardContainer">
-                    <Typography component="h1">Dashboard</Typography>
+                        <div className="dashboardContainer">
+                            <Typography component="h1">Dashboard</Typography>
 
-                    <div className="dashboardSummary">
-                        <div>
-                            <p>
-                                {/* Total Amount <br /> ₹{totalAmount} */}
-                                Total Amount <br /> ₹{200}
+                            <div className="dashboardSummary">
+                                <div>
+                                    <p>
+                                        {/* Total Amount <br /> ₹{totalAmount} */}
+                                        Total Amount <br /> ₹{200}
 
-                            </p>
+                                    </p>
+                                </div>
+                                <div className="dashboardSummaryBox2">
+                                    <Link to="/admin/products">
+                                        <p>Product</p>
+                                        <p>{products && products.length}</p>
+                                        {/* <p>{50}</p> */}
+                                    </Link>
+                                    <Link to="/admin/orders">
+                                        <p>Orders</p>
+                                        {/* <p>{orders && orders.length}</p> */}
+                                        <p>{4}</p>
+                                    </Link>
+                                    <Link to="/admin/users">
+                                        <p>Users</p>
+                                        {/* <p>{users && users.length}</p> */}
+                                        <p>{2}</p>
+                                    </Link>
+                                </div>
+                            </div>
+
+                            <div className="lineChart">
+                                <Line data={lineState} />
+                            </div>
+
+                            <div className="doughnutChart">
+                                <Doughnut data={doughnutState} />
+                            </div>
                         </div>
-                        <div className="dashboardSummaryBox2">
-                            <Link to="/admin/products">
-                                <p>Product</p>
-                                {/* <p>{products && products.length}</p> */}
-                                <p>{50}</p>
-                            </Link>
-                            <Link to="/admin/orders">
-                                <p>Orders</p>
-                                {/* <p>{orders && orders.length}</p> */}
-                                <p>{4}</p>
-                            </Link>
-                            <Link to="/admin/users">
-                                <p>Users</p>
-                                {/* <p>{users && users.length}</p> */}
-                                <p>{2}</p>
-                            </Link>
-                        </div>
                     </div>
 
-                    <div className="lineChart">
-                        <Line data={lineState} />
-                    </div>
-
-                    <div className="doughnutChart">
-                        <Doughnut data={doughnutState} />
-                    </div>
-                </div>
-            </div>
+            }
         </Fragment>
     )
 }

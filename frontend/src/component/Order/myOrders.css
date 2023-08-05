@@ -21,6 +21,7 @@
 
 .myOrdersTable {
     background-color: white;
+    /* color: black; */
 }
 
 .myOrdersTable>div {
@@ -39,12 +40,15 @@
 
 .MuiDataGrid-columnHeaders {
     /* background-color: tomato; */
-    /* padding: 1vmax !important; */
+    color: black;
 }
 
 .MuiDataGrid-columnHeaders div {
     /* color: rgb(255, 255, 255); */
+    background-color: rgb(210, 225, 242) !important;
     font: 500 1.1vmax "roboto" !important;
+    color: black !important;
+
 }
 
 .MuiDataGrid-iconSeparator {

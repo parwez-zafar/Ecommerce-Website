@@ -38,7 +38,7 @@
 
 
 import { configureStore } from "@reduxjs/toolkit";
-import { newReviewReducer, productDetailsReducer, productReducer } from './reducers/productReducer';
+import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer';
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from './reducers/cartReducer';
 import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
@@ -60,7 +60,7 @@ let initialState = {
 
 const store = configureStore({
     reducer: {
-        products: productReducer,
+        products: productsReducer,
         productDetails: productDetailsReducer,
         user: userReducer,
         profile: profileReducer,
@@ -70,6 +70,8 @@ const store = configureStore({
         myOrders: myOrdersReducer,
         orderDetails: orderDetailsReducer,
         newReview: newReviewReducer,
+        newProduct: newProductReducer,
+        product: productReducer
 
 
     },  // it can use multiple reducer and combine itself

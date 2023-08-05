@@ -32,10 +32,10 @@
 
 import { createReducer } from "@reduxjs/toolkit";
 
-const inititalProductState = {
+const inititalProductsState = {
     products: []
 }
-export const productReducer = createReducer(inititalProductState, {
+export const productsReducer = createReducer(inititalProductsState, {
     ALL_PRODUCT_REQUEST: (state, action) => {
         return {
             loading: true,
@@ -52,6 +52,24 @@ export const productReducer = createReducer(inititalProductState, {
         }
     },
     ALL_PRODUCT_FAIL: (state, action) => {
+        return {
+            loading: false,
+            error: action.payload
+        }
+    },
+    ADMIN_PRODUCT_REQUEST: (state, action) => {
+        return {
+            loading: true,
+            product: []
+        }
+    },
+    ADMIN_PRODUCT_SUCCESS: (state, action) => {
+        return {
+            loading: false,
+            products: action.payload,
+        }
+    },
+    ADMIN_PRODUCT_FAIL: (state, action) => {
         return {
             loading: false,
             error: action.payload
@@ -95,6 +113,88 @@ export const productDetailsReducer = createReducer(inititalproductDetailsState, 
         }
     },
 });
+
+
+
+const initialNewProductState = {
+
+}
+
+export const newProductReducer = createReducer(initialNewProductState, {
+    NEW_PRODUCT_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    NEW_PRODUCT_SUCCESS: (state, action) => {
+        return {
+            loading: false,
+            success: action.payload.success,
+            product: action.payload.product
+        }
+    },
+    NEW_PRODUCT_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+    },
+    NEW_PRODUCT_RESET: (state, action) => {
+        return {
+            ...state,
+            success: false,
+        }
+    },
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    },
+})
+
+
+
+const inititalProductState = {
+
+}
+
+export const productReducer = createReducer(inititalProductState, {
+    DELETE_PRODUCT_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    DELETE_PRODUCT_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            isDeleted: action.payload
+        }
+    },
+    DELETE_PRODUCT_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+    },
+    DELETE_PRODUCT_RESET: (state, action) => {
+        return {
+            ...state,
+            isDeleted: false,
+        }
+    },
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    },
+})
 
 const initialNewReviewState = {
 

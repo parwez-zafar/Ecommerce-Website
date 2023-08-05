@@ -19,11 +19,12 @@ const Sidebar = () => {
                 <Link to='/'>
                     <img src={logo} alt="Ecommerce" />
                 </Link>
-                <Link to='/admin/dsahboard'>
+                <Link to='/admin/dashboard'>
                     <p>
                         <DashboardIcon /> Dashboard
                     </p>
                 </Link>
+                {/* <div className='ProductDropdown'> */}
                 <Link>
                     <TreeView
                         defaultCollapseIcon={<ExpandMoreIcon />}
@@ -40,6 +41,7 @@ const Sidebar = () => {
                         </TreeItem>
                     </TreeView>
                 </Link>
+                {/* </div> */}
                 <Link to="/admin/orders">
                     <p>
                         <ListAltIcon />
@@ -59,7 +61,7 @@ const Sidebar = () => {
                 </Link>
             </div>
 
-        </Fragment>
+        </Fragment >
     )
 }
 

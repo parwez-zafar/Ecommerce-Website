@@ -11,7 +11,7 @@ import Products from './component/Product/Products';
 // import Search from './component/Product/Search.js'
 import LoginSignup from './component/User/LoginSignup';
 import Profile from './component/User/Profile.js'
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import UpdateProfile from './component/User/UpdateProfile.js'
@@ -29,7 +29,9 @@ import { loadStripe } from '@stripe/stripe-js';
 import OrderSuccess from './component/Cart/OrderSuccess.js'
 import MyOrders from './component/Order/MyOrders.js'
 import OrderDetails from './component/Order/OrderDetails.js'
-import Dashboard from './component/admin/Dashboard.js';
+import Dashboard from './component/Admin/Dashboard.js';
+import ProductList from './component/Admin/ProductList.js'
+import NewProduct from './component/Admin/NewProduct';
 
 
 
@@ -49,7 +51,7 @@ function App() {
   }
 
 
-  const { isAuthenticated } = useSelector((state) => state.user);
+  // const { isAuthenticated } = useSelector((state) => state.user);
 
 
   useEffect(() => {
@@ -82,7 +84,7 @@ function App() {
 
 
 
-
+          {/* Protected Route */}
           <Route exact path='/account' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
           <Route exact path='/me/update' element={<ProtectedRoute>  <UpdateProfile /></ProtectedRoute>} />
           <Route exact path='/password/update' element={<ProtectedRoute>  <UpdatePassword /></ProtectedRoute>} />
@@ -102,24 +104,26 @@ function App() {
 
           <Route exact path='/admin/dashboard' element={<ProtectedRoute isAdmin={true}>  <Dashboard /></ProtectedRoute>} />
 
-          {/* {
-            isAuthenticated && (
-              <Route exact path='/admin/dashboard' element={<Dashboard />} />
-            )
-          } */}
+          <Route exact path='/admin/products' element={<ProtectedRoute isAdmin={true}>  <ProductList /></ProtectedRoute>} />
+          <Route exact path='/admin/product' element={<ProtectedRoute isAdmin={true}>   <NewProduct /> </ProtectedRoute>} />
 
 
 
 
 
+
+
+
+
+
+
+
+          {/* userRoute */}
           {/* {
             isAuthenticated && (
               <Route exact path='/account' element={<Profile />} />
             )
           }
-
-
-
           {
             isAuthenticated && (
               <Route exact path='/me/update' element={<UpdateProfile />} />
@@ -175,15 +179,6 @@ function App() {
               <Route exact path='/admin/dashboard' element={<Dashboard />} />
             )
           } */}
-
-
-
-
-
-
-
-
-
         </Routes>
 
 

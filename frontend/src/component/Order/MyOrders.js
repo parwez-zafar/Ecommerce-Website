@@ -103,7 +103,7 @@ const MyOrders = () => {
                                 pageSize={10}
                                 disableRowSelectionOnClick
                                 className='myOrdersTable'
-                                autoHeight
+                                // autoHeight
                                 pageSizeOptions='none'
 
                             // hideFooter
