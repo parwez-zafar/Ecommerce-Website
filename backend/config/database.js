@@ -7,6 +7,7 @@ const connect_database = () => {
     }).then((data) => {
         console.log(`DataBase connected with ${data.connection.host}`);
     })
+
 }
 
 module.exports = connect_database;

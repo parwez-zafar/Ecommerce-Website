@@ -145,15 +145,19 @@ const ProductDetails = () => {
 
                                     <div className="detailsBlock-3">
                                         <h1>{`₹${product.price}`}</h1>
-                                        <div className="detailsBlock-3-1">
-                                            <div className="detailsBlock-3-1-1">
-                                                <button onClick={decreaseQuantity} >-</button>
-                                                <input readOnly type="number" value={quantity} />
-                                                <button onClick={increaseQuantity} >+</button>
-                                            </div>
-                                            <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandeler} >Add to Cart</button>
+                                        {
+                                            (product.stock >= 1) ?
+                                                <div className="detailsBlock-3-1">
+                                                    <div className="detailsBlock-3-1-1">
+                                                        <button onClick={decreaseQuantity} >-</button>
+                                                        <input readOnly type="number" value={quantity} />
+                                                        <button onClick={increaseQuantity} >+</button>
+                                                    </div>
+                                                    <button disabled={product.stock < 1 ? true : false} onClick={addToCartHandeler} >Add to Cart</button>
 
-                                        </div>
+                                                </div>
+                                                : ""
+                                        }
                                         <p>
                                             Status:{" "}
                                             <b className={product.stock < 1 ? 'redColor' : 'greenColor'}>

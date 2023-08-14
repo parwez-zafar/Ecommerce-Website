@@ -61,6 +61,7 @@ footer {
 
 .rightFooter>a {
     text-decoration: none;
+    align-self: flex-start;
     font-size: 1.3vmax;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     color: white;
@@ -69,5 +70,5 @@ footer {
 }
 
 .rightFooter>a:hover {
-    color: #eb4034;
+    color: #cbc5c4;
 }

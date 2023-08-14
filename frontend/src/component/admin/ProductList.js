@@ -79,13 +79,13 @@ const ProductList = () => {
                 // const id = useParams();
                 return (
                     <Fragment>
-                        <Link to={`/admin/products/${params.row.id}`}>
+                        <Link to={`/admin/product/${params.row.id}`}>
                             <EditIcon />
                         </Link>
                         <Button onClick={() => deleteProductHandler(params.row.id)}>
                             <DeleteIcon />
                         </Button>
-                    </Fragment >
+                    </Fragment>
                 );
             }
         }

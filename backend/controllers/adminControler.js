@@ -77,7 +77,7 @@ exports.createProduct = catchAsyncError(async (req, res, next) => {
 
     let images = [];
     // console.log("type of images ", typeof images);
-    console.log("type of req.body.images ", typeof req.body.images);
+    // console.log("type of req.body.images ", typeof req.body.images);
     if (typeof req.body.images === "string") {
         images.push(req.body.images)
     }
@@ -128,6 +128,39 @@ exports.updateProduct = catchAsyncError(async (req, res, next) => {
         return next(new ErrorHandler("Product Not Found", 404))
     }
 
+    // Images start here
+    let images = [];
+    // console.log("type of req.body.images ", typeof req.body.images);
+    if (typeof req.body.images === "string") {
+        images.push(req.body.images)
+    }
+    else {
+        images = req.body.images;
+    }
+
+    if (images != undefined) {
+        for (let i = 0; i < product.images.length; i++) {
+            await cloudinary.v2.uploader.destroy(product.images[i].public_id)
+        }
+
+        const imagesLink = [];
+        for (let i = 0; i < images.length; i++) {
+            const result = await cloudinary.v2.uploader.upload(images[i], {
+                folder: "products"
+            });
+            // console.log(result);
+            imagesLink.push({
+                public_id: result.public_id,
+                url: result.secure_url
+            })
+        }
+        req.body.images = imagesLink;
+
+    }
+
+
+
+
     product = await Product.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
@@ -155,7 +188,7 @@ exports.deleteProduct = catchAsyncError(async (req, res, next) => {
     if (!product) {
         return next(new ErrorHandler("Product Not Found", 404))
     }
-
+    // Deleting Images from cloudinary
     for (let i = 0; i < product.images.length; i++) {
         await cloudinary.v2.uploader.destroy(product.images[i].public_id)
     }

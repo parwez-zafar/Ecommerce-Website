@@ -91,8 +91,9 @@
 
 .detailsBlock-3-1-1>input {
     border: none;
+    /* width: 1vmax; */
     padding: 0.8vmax;
-    width: 2vmax;
+    width: 3vmax;
     text-align: center;
     outline: none;
     font: 400 0.8vmax "Roboto";
@@ -104,7 +105,8 @@
     cursor: pointer;
     color: white;
     transition: all 0.5s;
-    background-color: tomato;
+    /* background-color: tomato; */
+    background-color: rgba(0, 0, 0, 0.74);
     font: 500 0.7vmax "Roboto";
     border-radius: 20px;
     padding: 0.5vmax 2vmax;
@@ -113,7 +115,7 @@
 }
 
 .detailsBlock-3-1>button:last-child:hover {
-    background-color: rgb(214, 84, 61);
+    background-color: rgba(4, 4, 4, 0.74);
 }
 
 .detailsBlock-3>p {

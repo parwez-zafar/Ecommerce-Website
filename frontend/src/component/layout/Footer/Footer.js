@@ -2,8 +2,10 @@ import React from 'react'
 import playstore from '../../../images/playstore.png';
 import appstore from '../../../images/Appstore.png';
 // import { Link } from 'react-router-dom';
-import './Footer.css'
-
+import './Footer.css';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import InstagramIcon from '@mui/icons-material/Instagram';
 const Footer = () => {
     return (
         <footer id='footer'>
@@ -25,13 +27,14 @@ const Footer = () => {
                 <h4>Follow Us</h4>
 
 
-                <a href='https://www.linkedin.com/in/md-parwez-zafar-761b791b9/' target="_blank" rel="noopener noreferrer" >LinkedIn</a>
-                <a href='https://twitter.com/158Zafar' target="_blank" rel="noopener noreferrer" >Twitter</a>
-                <a href='https://www.instagram.com/parwez.zafar.737/' target="_blank" rel="noopener noreferrer" >Instagram</a>
+                <a href='https://www.linkedin.com/in/md-parwez-zafar-761b791b9/' target="_blank" rel="noopener noreferrer" >
+                    <LinkedInIcon /> LinkedIn</a>
+                <a href='https://twitter.com/158Zafar' target="_blank" rel="noopener noreferrer" > <TwitterIcon /> Twitter</a>
+                <a href='https://www.instagram.com/parwez.zafar.737/' target="_blank" rel="noopener noreferrer" > <InstagramIcon /> Instagram</a>
 
             </div>
 
-        </footer>
+        </footer >
     )
 }
 

@@ -188,6 +188,32 @@ export const productReducer = createReducer(inititalProductState, {
             isDeleted: false,
         }
     },
+    UPDATE_PRODUCT_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    UPDATE_PRODUCT_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            isUpdated: action.payload
+        }
+    },
+    UPDATE_PRODUCT_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload
+        }
+    },
+    UPDATE_PRODUCT_RESET: (state, action) => {
+        return {
+            ...state,
+            isUpdated: false,
+        }
+    },
     CLEAR_ERRORS: (state, action) => {
         return {
             ...state,
