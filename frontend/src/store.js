@@ -41,7 +41,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer';
 import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from './reducers/cartReducer';
-import { myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
+import { OrdersReducer, allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
 let initialState = {
     cart: {
         cartItems: localStorage.getItem("cartItems")
@@ -71,7 +71,9 @@ const store = configureStore({
         orderDetails: orderDetailsReducer,
         newReview: newReviewReducer,
         newProduct: newProductReducer,
-        product: productReducer
+        product: productReducer,
+        allOrders: allOrdersReducer,
+        order: OrdersReducer,
 
 
     },  // it can use multiple reducer and combine itself
