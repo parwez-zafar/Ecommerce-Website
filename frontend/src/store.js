@@ -39,7 +39,7 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer';
-import { forgotPasswordReducer, profileReducer, userReducer } from "./reducers/userReducer";
+import { allUserReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from './reducers/cartReducer';
 import { OrdersReducer, allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
 let initialState = {
@@ -74,6 +74,8 @@ const store = configureStore({
         product: productReducer,
         allOrders: allOrdersReducer,
         order: OrdersReducer,
+        allUsers: allUserReducer,
+        userDetails: userDetailsReducer,
 
 
     },  // it can use multiple reducer and combine itself

@@ -113,6 +113,7 @@ export const profileReducer = createReducer(inititalProfileState, {
             loading: true
         }
     },
+
     UPDATE_PROFILE_SUCCESS: (state, action) => {
         return {
             ...state,
@@ -160,6 +161,68 @@ export const profileReducer = createReducer(inititalProfileState, {
             error: action.payload,
         };
     },
+
+
+
+
+    UPDATE_USER_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    UPDATE_USER_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            isUpdated: action.payload,
+        }
+    },
+    UPDATE_USER_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        }
+    },
+    UPDATE_USER_RESET: (state, action) => {
+        return {
+            ...state,
+            isUpdated: false,
+        }
+    },
+    DELETE_USER_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true
+        }
+    },
+    DELETE_USER_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            isDeleted: action.payload.success,
+            message: action.payload.message
+        }
+    },
+    DELETE_USER_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        }
+    },
+    DELETE_USER_RESET: (state, action) => {
+        return {
+            ...state,
+            isDeleted: false,
+        }
+    },
+
+
+
+
+
     CLEAR_ERRORS: (state, action) => {
         return {
             ...state,
@@ -228,3 +291,80 @@ export const forgotPasswordReducer = createReducer(inititalForgotPasswordState, 
     }
 
 });
+
+
+
+// All User Reducer
+
+const inititalALLUserState = {
+    users: []
+}
+export const allUserReducer = createReducer(inititalALLUserState, {
+    ALL_USERS_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true,
+        }
+    },
+    ALL_USERS_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            users: action.payload,
+        };
+    },
+    ALL_USERS_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        };
+    },
+
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    }
+
+});
+
+
+// User Details Reducer
+
+const inititalUserDetailsState = {
+    user: {}
+}
+export const userDetailsReducer = createReducer(inititalUserDetailsState, {
+    USER_DETAILS_REQUEST: (state, action) => {
+        return {
+            ...state,
+            loading: true,
+        }
+    },
+    USER_DETAILS_SUCCESS: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            user: action.payload,
+        };
+    },
+    USER_DETAILS_FAIL: (state, action) => {
+        return {
+            ...state,
+            loading: false,
+            error: action.payload,
+        };
+    },
+
+    CLEAR_ERRORS: (state, action) => {
+        return {
+            ...state,
+            error: null,
+        }
+    }
+
+});
+
+

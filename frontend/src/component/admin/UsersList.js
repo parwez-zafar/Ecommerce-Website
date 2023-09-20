@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import './productList.css';
+import './productList.css'
 import { DataGrid } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,19 +10,18 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import MetaData from '../layout/MetaData';
 import Sidebar from './Sidebar';
 import Loader from '../layout/Loader/Loader';
-import { deleteOrder, getAllOrder, clearErrors } from '../../actions/orderAction';
-import { DELETE_ORDER_RESET } from '../../constants/orderConstant';
+import { clearErrors, deleteUser, getAllUsers } from '../../actions/userAction';
+import { DELETE_USER_RESET } from '../../constants/userConstants';
 
-const OrderList = () => {
+const UsersList = () => {
     const dispatch = useDispatch();
     const alert = useAlert();
     const navigate = useNavigate();
-    const { loading, error, orders } = useSelector((state) => state.allOrders);
-    const { error: deleteError, isDeleted } = useSelector((state) => state.order)
+    const { loading, error, users } = useSelector((state) => state.allUsers);
+    const { error: deleteError, isDeleted, message } = useSelector((state) => state.profile)
 
-    // console.log(useSelector((state) => state.products));
-    const deleteOrderHandler = (id) => {
-        dispatch(deleteOrder(id))
+    const deleteUserHandler = (id) => {
+        dispatch(deleteUser(id))
 
     }
     useEffect(() => {
@@ -35,25 +34,37 @@ const OrderList = () => {
             dispatch(clearErrors());
         }
         if (isDeleted) {
-            alert.success("Order Deleted Successfully")
-            navigate('/admin/orders');
-            dispatch({ type: DELETE_ORDER_RESET })
+            alert.success(message)
+            navigate('/admin/users');
+            dispatch({ type: DELETE_USER_RESET })
         }
-        dispatch(getAllOrder());
-    }, [dispatch, error, alert, deleteError, isDeleted, navigate])
+        dispatch(getAllUsers());
+    }, [dispatch, error, alert, deleteError, isDeleted, navigate, message])
 
     const columns = [
-        { field: "id", headerName: "Order ID", minWidth: 300, flex: 1 },
+        { field: "id", headerName: "User ID", minWidth: 200, flex: 0.8 },
 
         {
-            field: "status",
-            headerName: "Status",
+            field: "email",
+            headerName: "Email",
+            minWidth: 350,
+            flex: 1,
+        },
+        {
+            field: "name",
+            headerName: "Name",
             minWidth: 150,
             flex: 0.5,
+        },
 
-
+        {
+            field: "role",
+            headerName: "Role",
+            type: "number",
+            minWidth: 270,
+            flex: 0.3,
             renderCell: (params) => {
-                const cellClassName = params.row.status === 'Delivered' ? 'greenColor' : 'redColor';
+                const cellClassName = params.row.role === 'admin' ? 'greenColor' : 'redColor';
 
                 return (
                     <div className={cellClassName}>
@@ -61,24 +72,7 @@ const OrderList = () => {
                     </div>
                 );
             },
-
         },
-        {
-            field: "itemsQty",
-            headerName: "Items Qty",
-            type: "number",
-            minWidth: 150,
-            flex: 0.4,
-        },
-
-        {
-            field: "amount",
-            headerName: "Amount",
-            type: "number",
-            minWidth: 270,
-            flex: 0.5,
-        },
-
         {
             field: 'action',
             flex: 0.3,
@@ -89,10 +83,10 @@ const OrderList = () => {
             renderCell: (params) => {
                 return (
                     <Fragment>
-                        <Link to={`/admin/order/${params.row.id}`}>
+                        <Link to={`/admin/user/${params.row.id}`}>
                             <EditIcon />
                         </Link>
-                        <Button onClick={() => deleteOrderHandler(params.row.id)}>
+                        <Button onClick={() => deleteUserHandler(params.row.id)}>
                             <DeleteIcon />
                         </Button>
                     </Fragment>
@@ -103,21 +97,20 @@ const OrderList = () => {
 
 
     let rows = [];
-
-    orders &&
-        orders.forEach((item, index) => {
+    users &&
+        users.forEach((item, index) => {
             rows.push({
                 id: item._id,
-                itemsQty: item.orderItems.length,
-                amount: item.totalPrice,
-                status: item.orderStatus,
+                email: item.email,
+                name: item.name,
+                role: item.role,
             });
         });
 
 
     return (
         <Fragment>
-            <MetaData title={`ALL ORDERS - Admin`} />
+            <MetaData title={`ALL USERS - Admin`} />
 
             {
                 loading ?
@@ -127,7 +120,7 @@ const OrderList = () => {
                         <div className="dashboard">
                             <Sidebar />
                             <div className="productListContainer">
-                                <h1 id="productListHeading">ALL ORDERS</h1>
+                                <h1 id="productListHeading">ALL USERS</h1>
 
                                 <DataGrid
                                     rows={rows}
@@ -149,4 +142,5 @@ const OrderList = () => {
     )
 }
 
-export default OrderList;
+
+export default UsersList

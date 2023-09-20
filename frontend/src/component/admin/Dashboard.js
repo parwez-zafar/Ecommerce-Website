@@ -10,6 +10,8 @@ import Chart from 'chart.js/auto';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAdminProducts } from '../../actions/productAction.js';
 import Loader from '../layout/Loader/Loader.js';
+import { getAllOrder } from '../../actions/orderAction.js';
+import { getAllUsers } from '../../actions/userAction.js';
 
 Chart.register(CategoryScale);
 
@@ -17,6 +19,8 @@ Chart.register(CategoryScale);
 
 const Dashboard = () => {
     const { loading, products } = useSelector((state) => state.products);
+    const { orders } = useSelector((state) => state.allOrders);
+    const { users } = useSelector((state) => state.allUsers);
     const dispatch = useDispatch();
     let outOfStock = 0;
     products && products.forEach((item) => {
@@ -50,6 +54,8 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(getAdminProducts());
+        dispatch(getAllOrder());
+        dispatch(getAllUsers());
     }, [dispatch])
     return (
         <Fragment>
@@ -75,17 +81,14 @@ const Dashboard = () => {
                                     <Link to="/admin/products">
                                         <p>Product</p>
                                         <p>{products && products.length}</p>
-                                        {/* <p>{50}</p> */}
                                     </Link>
                                     <Link to="/admin/orders">
                                         <p>Orders</p>
-                                        {/* <p>{orders && orders.length}</p> */}
-                                        <p>{4}</p>
+                                        <p>{orders && orders.length}</p>
                                     </Link>
                                     <Link to="/admin/users">
                                         <p>Users</p>
-                                        {/* <p>{users && users.length}</p> */}
-                                        <p>{2}</p>
+                                        <p>{users && users.length}</p>
                                     </Link>
                                 </div>
                             </div>
