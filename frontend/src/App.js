@@ -37,6 +37,8 @@ import OrderList from './component/Admin/OrderList.js'
 import ProcessOrder from './component/Admin/ProcessOrder.js'
 import UsersList from './component/Admin/UsersList';
 import UpdateUser from './component/Admin/UpdateUser';
+import ProductReview from './component/Admin/ProductReview.js';
+import NotFound from './component/layout/NotFound.js'
 
 
 
@@ -116,6 +118,7 @@ function App() {
           <Route exact path='/admin/order/:id' element={<ProtectedRoute isAdmin={true}>   <ProcessOrder /> </ProtectedRoute>} />
           <Route exact path='/admin/users' element={<ProtectedRoute isAdmin={true}>   <UsersList /> </ProtectedRoute>} />
           <Route exact path='/admin/user/:id' element={<ProtectedRoute isAdmin={true}>   <UpdateUser /> </ProtectedRoute>} />
+          <Route exact path='/admin/reviews' element={<ProtectedRoute isAdmin={true}>   <ProductReview /> </ProtectedRoute>} />
 
 
 
@@ -189,6 +192,10 @@ function App() {
               <Route exact path='/admin/dashboard' element={<Dashboard />} />
             )
           } */}
+
+
+          <Route path="*" element={<NotFound />} />
+
         </Routes>
 
 

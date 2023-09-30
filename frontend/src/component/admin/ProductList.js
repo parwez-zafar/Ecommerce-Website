@@ -44,13 +44,36 @@ const ProductList = () => {
     }, [dispatch, error, alert, deleteError, isDeleted, navigate])
 
     const columns = [
-        { field: "id", headerName: "Product ID", minWidth: 200, flex: 0.5 },
+        {
+            field: "id",
+            headerName: "Product ID",
+            minWidth: 200,
+            flex: 0.5,
+            renderCell: (params) => {
+                const cellClassName = params.row.stock === 0 ? 'redColor' : 'greenColor';
+
+                return (
+                    <div className={cellClassName}>
+                        {params.value}
+                    </div>
+                );
+            },
+        },
 
         {
             field: "name",
             headerName: "Name",
             minWidth: 350,
             flex: 1,
+            renderCell: (params) => {
+                const cellClassName = params.row.stock === 0 ? 'redColor' : 'greenColor';
+
+                return (
+                    <div className={cellClassName}>
+                        {params.value}
+                    </div>
+                );
+            },
         },
         {
             field: "stock",
@@ -58,6 +81,15 @@ const ProductList = () => {
             type: "number",
             minWidth: 150,
             flex: 0.3,
+            renderCell: (params) => {
+                const cellClassName = params.row.stock === 0 ? 'redColor' : 'greenColor';
+
+                return (
+                    <div className={cellClassName}>
+                        {params.value}
+                    </div>
+                );
+            },
         },
 
         {
@@ -66,6 +98,15 @@ const ProductList = () => {
             type: "number",
             minWidth: 270,
             flex: 0.5,
+            renderCell: (params) => {
+                const cellClassName = params.row.stock === 0 ? 'redColor' : 'greenColor';
+
+                return (
+                    <div className={cellClassName}>
+                        {params.value}
+                    </div>
+                );
+            },
         },
         {
             field: 'action',

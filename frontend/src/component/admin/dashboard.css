@@ -49,6 +49,7 @@
     background-color: rgb(255, 233, 174);
     text-decoration: none;
     padding: 1.5rem;
+    /* color: white; */
     width: 10vmax;
     height: 10vmax;
     margin: 2rem;
@@ -60,12 +61,12 @@
 }
 
 .dashboardSummaryBox2>a:first-child {
-    background-color: rgb(255, 110, 110);
+    background-color: rgb(192, 208, 210);
     color: rgb(255, 255, 255);
 }
 
 .dashboardSummaryBox2>a:last-child {
-    background-color: rgb(51, 51, 51);
+    background-color: rgb(236, 227, 227);
     color: rgb(255, 255, 255);
 }
 

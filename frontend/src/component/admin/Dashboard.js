@@ -27,7 +27,10 @@ const Dashboard = () => {
         if (item.stock === 0)
             outOfStock += 1;
     });
-
+    let totalAmount = 0;
+    orders && orders.forEach(item => {
+        totalAmount += item.totalPrice;
+    })
     const lineState = {
         labels: ["Initial Amount", "Amount Earned"],
         datasets: [
@@ -35,7 +38,7 @@ const Dashboard = () => {
                 label: "TOTAL AMOUNT",
                 backgroundColor: ["tomato"],
                 hoverBackgroundColor: ["rgb(197, 72, 49)"],
-                data: [0, 4000],
+                data: [0, totalAmount],
             },
         ],
     };
@@ -73,7 +76,7 @@ const Dashboard = () => {
                                 <div>
                                     <p>
                                         {/* Total Amount <br /> ₹{totalAmount} */}
-                                        Total Amount <br /> ₹{200}
+                                        Total Amount <br /> ₹{totalAmount}
 
                                     </p>
                                 </div>

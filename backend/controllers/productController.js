@@ -133,9 +133,9 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
     })
     // console.log(userId);
     // console.log(loginId);
-    if (userId !== loginId) {
-        return next(new ErrorHandler("You Are Not Allowed To Delete This Review", 405))
-    }
+    // if (userId !== loginId) {
+    //     return next(new ErrorHandler("You Are Not Allowed To Delete This Review", 405))
+    // }
 
     const reviews = product.reviews.filter((rev) => rev._id.toString() !== req.query.reviewId.toString());
 
@@ -144,7 +144,12 @@ exports.deleteReview = catchAsyncError(async (req, res, next) => {
     reviews.forEach((rev) => {
         avg += rev.rating;
     })
-    const ratings = avg / reviews.length;
+    let ratings = 0;
+    if (reviews.length === 0) {
+        ratings = 0;
+    }
+    else
+        ratings = avg / reviews.length;
     const numOfReviews = reviews.length;
     await Product.findByIdAndUpdate(req.query.productId, {
         reviews,

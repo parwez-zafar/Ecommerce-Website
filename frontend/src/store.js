@@ -38,7 +38,7 @@
 
 
 import { configureStore } from "@reduxjs/toolkit";
-import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer';
+import { ProductReviewsReducer, ReviewReducer, newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer } from './reducers/productReducer';
 import { allUserReducer, forgotPasswordReducer, profileReducer, userDetailsReducer, userReducer } from "./reducers/userReducer";
 import { cartReducer } from './reducers/cartReducer';
 import { OrdersReducer, allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer } from './reducers/orderReducer';
@@ -76,6 +76,8 @@ const store = configureStore({
         order: OrdersReducer,
         allUsers: allUserReducer,
         userDetails: userDetailsReducer,
+        productReviews: ProductReviewsReducer,
+        review: ReviewReducer
 
 
     },  // it can use multiple reducer and combine itself
