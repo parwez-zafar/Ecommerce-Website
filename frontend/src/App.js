@@ -31,12 +31,12 @@ import MyOrders from './component/Order/MyOrders.js'
 import OrderDetails from './component/Order/OrderDetails.js'
 import Dashboard from './component/Admin/Dashboard.js';
 import ProductList from './component/Admin/ProductList.js'
-import NewProduct from './component/Admin/NewProduct';
+import NewProduct from './component/Admin/NewProduct.js';
 import UpdateProduct from './component/Admin/UpdateProduct.js'
 import OrderList from './component/Admin/OrderList.js'
 import ProcessOrder from './component/Admin/ProcessOrder.js'
-import UsersList from './component/Admin/UsersList';
-import UpdateUser from './component/Admin/UpdateUser';
+import UsersList from './component/Admin/UsersList.js';
+import UpdateUser from './component/Admin/UpdateUser.js';
 import ProductReview from './component/Admin/ProductReview.js';
 import NotFound from './component/layout/NotFound.js'
 
