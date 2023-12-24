@@ -29,6 +29,10 @@ import {
     DELETE_REVIEW_SUCCESS,
     DELETE_REVIEW_FAIL
 } from '../constants/productConstants';
+
+const token = localStorage.getItem('authToken');
+
+
 export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) => async (dispatch) => {
     try {
         dispatch({ type: ALL_PRODUCT_REQUEST });
@@ -63,7 +67,13 @@ export const getProduct = (keyword = "", currentPage = 1, price = [0, 25000], ca
 export const getAdminProducts = () => async (dispatch) => {
     try {
         dispatch({ type: ADMIN_PRODUCT_REQUEST });
-        const { data } = await axios.get("/api/v1/admin/products");
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            },
+        };
+        const { data } = await axios.get("/api/v1/admin/products", config);
         // console.log("admin data is ", data);
         dispatch({
             type: ADMIN_PRODUCT_SUCCESS,
@@ -85,7 +95,8 @@ export const createProduct = (productData) => async (dispatch) => {
         dispatch({ type: NEW_PRODUCT_REQUEST })
         const config = {
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
+                "authorization": token
             },
         };
         const { data } = await axios.post('/api/v1/admin/product/new', productData, config);
@@ -107,8 +118,13 @@ export const createProduct = (productData) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_PRODUCT_REQUEST })
-
-        const { data } = await axios.delete(`/api/v1/admin/product/${id}`);
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            },
+        };
+        const { data } = await axios.delete(`/api/v1/admin/product/${id}`, config);
 
         dispatch({
             type: DELETE_PRODUCT_SUCCESS,
@@ -130,7 +146,8 @@ export const updateProduct = (id, productData) => async (dispatch) => {
         dispatch({ type: UPDATE_PRODUCT_REQUEST })
         const config = {
             headers: {
-                "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
+                "authorization": token
             },
         };
         const { data } = await axios.put(`/api/v1/admin/product/${id}`, productData, config);
@@ -178,7 +195,8 @@ export const newReview = (reviewData) => async (dispatch) => {
         dispatch({ type: NEW_REVIEW_REQUEST })
         const config = {
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "authorization": token
             },
         };
         const { data } = await axios.put('/api/v1/review', reviewData, config);
@@ -204,8 +222,13 @@ export const newReview = (reviewData) => async (dispatch) => {
 export const getAllReviews = (id) => async (dispatch) => {
     try {
         dispatch({ type: ALL_REVIEW_REQUEST })
-
-        const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            },
+        };
+        const { data } = await axios.get(`/api/v1/reviews?id=${id}`, config);
 
         dispatch({
             type: ALL_REVIEW_SUCCESS,
@@ -225,8 +248,13 @@ export const getAllReviews = (id) => async (dispatch) => {
 export const deleteReview = (reviewId, productId) => async (dispatch) => {
     try {
         dispatch({ type: DELETE_REVIEW_REQUEST })
-
-        const { data } = await axios.delete(`/api/v1/reviews?reviewId=${reviewId}&productId=${productId}`);
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": token
+            },
+        };
+        const { data } = await axios.delete(`/api/v1/reviews?reviewId=${reviewId}&productId=${productId}`, config);
 
         dispatch({
             type: DELETE_REVIEW_SUCCESS,

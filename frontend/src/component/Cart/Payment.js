@@ -55,11 +55,12 @@ const Payment = () => {
         e.preventDefault();
 
         payBtn.current.disabled = true;
-
+        const token = localStorage.getItem('authToken');
         try {
             const config = {
                 headers: {
                     "Content-Type": "application/json",
+                    "authorization": token
                 },
             };
             const { data } = await axios.post(

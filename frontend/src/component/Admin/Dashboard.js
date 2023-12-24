@@ -21,6 +21,7 @@ const Dashboard = () => {
     const { loading, products } = useSelector((state) => state.products);
     const { orders } = useSelector((state) => state.allOrders);
     const { users } = useSelector((state) => state.allUsers);
+    // console.log("users", users);
     const dispatch = useDispatch();
     let outOfStock = 0;
     products && products.forEach((item) => {

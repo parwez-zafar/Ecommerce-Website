@@ -15,8 +15,9 @@ exports.processPayment = catchAsyncError(async (req, res, next) => {
     res.status(200).json({ success: true, client_secret: myPayment.client_secret })
 })
 
-
+// console.log("api key", process.env.STRIPE_API_KEY);
 
 exports.sendStripeApiKey = catchAsyncError(async (req, res, next) => {
+
     res.status(200).json({ stripeApiKey: process.env.STRIPE_API_KEY })
 })

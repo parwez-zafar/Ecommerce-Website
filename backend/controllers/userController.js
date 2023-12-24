@@ -133,6 +133,9 @@ exports.resetPassword = catchAsyncError(async (req, res, next) => {
 
 // Get user details
 exports.getUserDetails = catchAsyncError(async (req, res, next) => {
+    // console.log("auto token", config);
+    // console.log("details");
+    // console.log("user ", req.user);
     const user = await User.findById(req.user.id);
 
     res.status(200).json({

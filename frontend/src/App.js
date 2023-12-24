@@ -11,7 +11,6 @@ import Products from './component/Product/Products';
 // import Search from './component/Product/Search.js'
 import LoginSignup from './component/User/LoginSignup';
 import Profile from './component/User/Profile.js'
-// import { useSelector } from 'react-redux';
 import store from './store';
 import { loadUser } from './actions/userAction';
 import UpdateProfile from './component/User/UpdateProfile.js'
@@ -53,7 +52,18 @@ function App() {
 
 
   async function getStripeApiKey() {
-    const { data } = await axios.get('/api/v1/stripeapikey');
+    const config = {
+
+      headers: {
+        authorization: localStorage.getItem('authToken'),
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      }
+
+    }
+    const { data } = await axios.get('/api/v1/stripeapikey', config);
+
+    // console.log("data is", data);
     setStripeApiKey(data.stripeApiKey)
   }
 
