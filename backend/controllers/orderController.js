@@ -1,6 +1,6 @@
 const Order = require('../models/orderModel');
 const Product = require('../models/prodectModel');
-const ErrorHandler = require('../utils/errorhandlers');
+const ErrorHandler = require('../utils/Errorhandlers');
 const catchAsyncError = require('../middleware/catchAsyncError');
 const { Query } = require('mongoose');
 
