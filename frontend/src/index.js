@@ -12,8 +12,8 @@ import AlertTemplate from 'react-alert-template-basic';
 
 
 const setupAxios = () => {
-  axios.defaults.baseURL = "http://localhost:4000";
-  // axios.defaults.baseURL = "https://api-connect2nature.onrender.com/"; //->latest deployed
+  // axios.defaults.baseURL = "http://localhost:4000";
+  axios.defaults.baseURL = "https://prwz-ecommerce.onrender.com/"; //->latest deployed
 
   axios.defaults.headers = {
     "Cache-Control": "no-cache,no-store",
